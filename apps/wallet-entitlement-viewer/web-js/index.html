@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Token Depot Wallet Entitlement Viewer</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Wallet Entitlement Viewer</h1>
+      <p>View CA issue-mode token balances for a Kaspa address. This app is read-only and does not use wallet keys or signing.</p>
+    </header>
+
+    <section class="card">
+      <form id="lookupForm" class="form-grid">
+        <label>Network
+          <select id="network">
+            <option value="mainnet" selected>Mainnet</option>
+            <option value="tn10">TN10</option>
+          </select>
+        </label>
+        <label>Wallet address
+          <input id="addressInput" spellcheck="false" value="kaspa:qpkxn24070npk7cx336vlfa6wcj8cvcgrwd482rxdeqn9qrsd6gkzkpt9sr94">
+        </label>
+        <button id="lookupButton" type="submit">View entitlements</button>
+      </form>
+      <label style="margin-top: 12px;">
+        <input id="knownOnly" type="checkbox"> Show Token Depot-known CAs only
+      </label>
+      <p id="status" class="status">Ready.</p>
+    </section>
+
+    <section id="summary" class="card" hidden></section>
+    <section id="results" class="card" hidden></section>
+    <section id="rawProof" class="card" hidden></section>
+  </main>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
