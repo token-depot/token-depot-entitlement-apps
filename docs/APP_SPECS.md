@@ -64,3 +64,60 @@ lockedRaw > 0 = locked balance exists
 registry match = Token Depot-known label
 no registry match = public CA only
 ```
+
+## EA-3 — Token Gate Demo
+
+### Purpose
+
+Enter a wallet address, required CA, and minimum amount. The app returns a read-only access decision:
+
+```text
+ACCESS GRANTED
+ACCESS DENIED
+```
+
+### Inputs
+
+```text
+network: mainnet | tn10
+wallet address: kaspa:... or kaspatest:...
+required CA: raw 64-char CA or CA:<64-char-ca>
+minimum amount: human display amount using the token decimals
+```
+
+### Data flow
+
+```text
+1. Fetch CA metadata with GET /krc20/token/{ca}.
+2. Read token decimals from metadata.
+3. Convert minimum display amount to raw units.
+4. Fetch wallet balance with GET /krc20/address/{address}/token/{ca}.
+5. Compare BigInt(balanceRaw) >= BigInt(requiredRaw).
+6. Show access decision and raw proof.
+```
+
+### Output sections
+
+```text
+Access Decision
+Token / CA
+Wallet address
+Required amount
+Wallet balance
+Raw proof endpoint
+Raw API response
+```
+
+### Status behavior
+
+```text
+balanceRaw >= requiredRaw = ACCESS GRANTED
+balanceRaw < requiredRaw = ACCESS DENIED
+invalid CA = Invalid CA format
+missing token metadata = Required CA was not found
+invalid wallet/network mismatch = Address prefix does not match selected network
+```
+
+### Security note
+
+This browser demo is educational. Production dapps should perform the same entitlement check server-side before granting protected access.
