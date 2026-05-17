@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Token Depot Merchant Redeem Verifier</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Merchant Redeem Verifier</h1>
+      <p>Verify that a KRC-20 CA transfer operation sent the expected amount to the merchant address. This app is read-only and does not use wallet keys or signing.</p>
+    </header>
+
+    <section class="card">
+      <form id="verifyForm" class="form-grid">
+        <label>Network
+          <select id="network">
+            <option value="mainnet" selected>Mainnet</option>
+            <option value="tn10">TN10</option>
+          </select>
+        </label>
+        <label>Operation proof id
+          <input id="proofIdInput" spellcheck="false" value="4293125140000">
+        </label>
+        <label>Expected CA
+          <input id="caInput" spellcheck="false" value="2d6fc4377f2fb2a5d051e6c99b6d784960b45edc2f6d268bfc432b5ee5dee3dc">
+        </label>
+        <label>Expected amount
+          <input id="amountInput" spellcheck="false" value="1">
+        </label>
+        <label>Merchant receive address
+          <input id="merchantInput" spellcheck="false" value="kaspa:qrp6qd9jx8tj3f0rsyqz04a9052dsf0u7dtf0emstjefccmucp4n5yxvz0mmw">
+        </label>
+        <label>Customer address (optional)
+          <input id="customerInput" spellcheck="false" value="kaspa:qpkxn24070npk7cx336vlfa6wcj8cvcgrwd482rxdeqn9qrsd6gkzkpt9sr94">
+        </label>
+        <button type="submit">Verify redeem</button>
+      </form>
+      <p id="status" class="status">Ready.</p>
+    </section>
+
+    <section id="decision" class="card" hidden></section>
+    <section id="proof" class="card" hidden></section>
+  </main>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
