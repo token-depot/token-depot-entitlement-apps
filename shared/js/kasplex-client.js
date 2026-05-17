@@ -17,6 +17,14 @@ function normalizeAddressPath(address) {
   return text;
 }
 
+function normalizeOperationId(value) {
+  const text = String(value || '').trim().toLowerCase();
+  if (!/^(\d+|[0-9a-f]{64})$/.test(text)) {
+    throw new Error('Invalid operation proof id. Expected opScore digits or a 64-character hex id.');
+  }
+  return text;
+}
+
 async function fetchJson(url) {
   const res = await fetch(url, { method: 'GET', headers: { accept: 'application/json' } });
   if (!res.ok) {
@@ -49,4 +57,11 @@ export async function fetchAddressToken(network, address, caInput) {
   const url = `${getApiBase(network)}/krc20/address/${addressPath}/token/${ca}`;
   const data = await fetchJson(url);
   return { url, data, holding: Array.isArray(data.result) ? data.result[0] || null : null };
+}
+
+export async function fetchOperationInfo(network, proofId) {
+  const opId = normalizeOperationId(proofId);
+  const url = `${getApiBase(network)}/krc20/op/${opId}`;
+  const data = await fetchJson(url);
+  return { url, data, operation: Array.isArray(data.result) ? data.result[0] || null : null };
 }
