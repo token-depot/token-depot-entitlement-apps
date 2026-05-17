@@ -7,11 +7,12 @@ This repository is intentionally app-first, not SDK-first. The first examples ar
 ## Current status
 
 ```text
-v0.1.3
+v0.1.4
 EA-1 CA Token Explorer: working
 EA-2 Wallet Entitlement Viewer: working
 EA-3 Token Gate Demo: working from balance proof
-EA-4 Merchant Redeem Verifier: added for testing
+EA-4 Merchant Redeem Verifier: working from operation proof
+EA-5 Backend Verification Server: added for testing
 Address-path handling: fixed for Kasplex address tokenlist endpoints
 Operation proof lookup: proved with opScore
 ```
@@ -23,6 +24,7 @@ Operation proof lookup: proved with opScore
 - How to view CA issue-mode token balances for a Kaspa address.
 - How to make a simple read-only token-gate decision from CA balance proof.
 - How to verify a merchant redemption transfer from public operation proof.
+- How to move entitlement and redemption checks server-side for real dapps.
 - How to distinguish public token metadata from Token Depot's known-CA registry.
 - How to prepare for real-world entitlement, coupon, membership, license, and redemption flows.
 
@@ -34,8 +36,9 @@ Operation proof lookup: proved with opScore
 | Wallet Entitlement Viewer | `apps/wallet-entitlement-viewer/web-js/` | Enter a Kaspa address and view CA issue-mode entitlements. |
 | Token Gate Demo | `apps/token-gate-demo/web-js/` | Enter wallet + CA + minimum amount and receive an access decision. |
 | Merchant Redeem Verifier | `apps/merchant-redeem-verifier/web-js/` | Enter operation proof + expected transfer details and verify redemption. |
+| Backend Verification Server | `apps/backend-verification-server/node-server/` | Server-side holding and redeem verification endpoints. |
 
-## Quick start
+## Quick start — browser apps
 
 Serve the repo locally so browser ES modules load correctly:
 
@@ -53,6 +56,19 @@ http://127.0.0.1:8088/apps/token-gate-demo/web-js/
 http://127.0.0.1:8088/apps/merchant-redeem-verifier/web-js/
 ```
 
+## Quick start — backend verifier
+
+```bash
+npm run check
+npm run start:backend
+```
+
+Open:
+
+```text
+http://127.0.0.1:8091/health
+```
+
 No wallet connection is used. No private keys, mnemonics, passphrases, keyfiles, signing, or Token Depot hosted infrastructure are required.
 
 ## Known Token Depot CA examples
@@ -68,7 +84,7 @@ Useful mainnet holder address for demos:
 kaspa:qpkxn24070npk7cx336vlfa6wcj8cvcgrwd482rxdeqn9qrsd6gkzkpt9sr94
 ```
 
-Useful redemption proof id for EA-4:
+Useful redemption proof id for EA-4/EA-5:
 
 ```text
 4293125140000
