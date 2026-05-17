@@ -144,7 +144,7 @@ Conclusion: explicit CA balance checks can distinguish "not held" without treati
 GET /krc20/oplist?tick={ca}
 ```
 
-MMXXVI operation history returned accepted operations with fields needed for future redemption verification:
+MMXXVI operation history returned accepted operations with fields needed for redemption verification:
 
 ```text
 op
@@ -174,6 +174,37 @@ opAccept: 1
 opError: empty
 ```
 
+## Proved endpoint: operation info by opScore
+
+```text
+GET /krc20/op/{id}
+```
+
+Tested proof id:
+
+```text
+4293125140000
+```
+
+Live proof returned:
+
+```text
+message: successful
+op: transfer
+ca: 2d6fc4377f2fb2a5d051e6c99b6d784960b45edc2f6d268bfc432b5ee5dee3dc
+amt: 1
+from: kaspa:qpkxn24070npk7cx336vlfa6wcj8cvcgrwd482rxdeqn9qrsd6gkzkpt9sr94
+to: kaspa:qrp6qd9jx8tj3f0rsyqz04a9052dsf0u7dtf0emstjefccmucp4n5yxvz0mmw
+name: MMXXVI
+opScore: 4293125140000
+hashRev: f6faaf9f7927fceec187f761c36a06e83f6b401d759bfd284936beea2764a202
+txAccept: 1
+opAccept: 1
+opError: empty
+```
+
+Conclusion: `opScore` is proven as a valid first proof-id type for EA-4 Merchant Redeem Verifier.
+
 ## v0.1.1 address-path fix proof
 
 Initial EA-2 testing produced:
@@ -199,21 +230,3 @@ Runtime result:
 ```text
 EA-2 Wallet Entitlement Viewer works after v0.1.1.
 ```
-
-## Remaining proof for future EA-4
-
-The Merchant Redeem Verifier still needs a separate proof for:
-
-```text
-GET /krc20/op/{id}
-```
-
-The open question is whether the most reliable ID for that app should be:
-
-```text
-opScore
-hashRev
-reveal transaction id
-```
-
-EA-1 and EA-2 do not depend on that proof.
