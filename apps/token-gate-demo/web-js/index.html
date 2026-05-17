@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Token Depot Token Gate Demo</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Token Gate Demo</h1>
+      <p>Check whether a wallet holds at least the required amount of a CA issue-mode token. This app is read-only and does not use wallet keys or signing.</p>
+    </header>
+
+    <section class="card">
+      <form id="gateForm" class="form-grid">
+        <label>Network
+          <select id="network">
+            <option value="mainnet" selected>Mainnet</option>
+            <option value="tn10">TN10</option>
+          </select>
+        </label>
+        <label>Wallet address
+          <input id="addressInput" spellcheck="false" value="kaspa:qpkxn24070npk7cx336vlfa6wcj8cvcgrwd482rxdeqn9qrsd6gkzkpt9sr94">
+        </label>
+        <label>Required CA
+          <input id="caInput" spellcheck="false" value="2d6fc4377f2fb2a5d051e6c99b6d784960b45edc2f6d268bfc432b5ee5dee3dc">
+        </label>
+        <label>Minimum amount
+          <input id="amountInput" spellcheck="false" value="1">
+        </label>
+        <button type="submit">Check access</button>
+      </form>
+      <p id="status" class="status">Ready.</p>
+    </section>
+
+    <section id="decision" class="card" hidden></section>
+    <section id="proof" class="card" hidden></section>
+  </main>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
