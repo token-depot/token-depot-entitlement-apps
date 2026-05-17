@@ -121,3 +121,73 @@ invalid wallet/network mismatch = Address prefix does not match selected network
 ### Security note
 
 This browser demo is educational. Production dapps should perform the same entitlement check server-side before granting protected access.
+
+## EA-4 — Merchant Redeem Verifier
+
+### Purpose
+
+Enter an operation proof id and expected redemption details. The app verifies whether a public KRC-20 transfer operation satisfies the merchant redemption rule.
+
+```text
+REDEEM VERIFIED
+REDEEM REJECTED
+```
+
+### Inputs
+
+```text
+network: mainnet | tn10
+operation proof id: opScore digits or 64-character hex id
+expected CA: raw 64-char CA or CA:<64-char-ca>
+expected amount: human display amount using token decimals
+merchant receive address: kaspa:... or kaspatest:...
+customer address: optional kaspa:... or kaspatest:...
+```
+
+### Data flow
+
+```text
+1. Fetch expected CA metadata with GET /krc20/token/{ca}.
+2. Read token decimals from metadata.
+3. Convert expected display amount to raw units.
+4. Fetch operation proof with GET /krc20/op/{id}.
+5. Verify op === transfer.
+6. Verify operation CA matches expected CA.
+7. Verify BigInt(operation.amt) >= BigInt(requiredRaw).
+8. Verify operation.to matches merchant address.
+9. Verify operation.from matches customer address when supplied.
+10. Verify txAccept === "1".
+11. Verify opAccept === "1".
+12. Verify opError is empty.
+13. Show verified/rejected decision and raw proof.
+```
+
+### Output sections
+
+```text
+Redeem Decision
+Verification Checks
+Token / CA
+Expected Amount
+Operation Amount
+From / To
+opScore
+hashRev
+Raw proof endpoint
+Raw API response
+```
+
+### Status behavior
+
+```text
+all checks pass = REDEEM VERIFIED
+one or more checks fail = REDEEM REJECTED
+invalid CA = Invalid CA format
+missing token metadata = Expected CA was not found
+missing operation = Operation proof was not found
+invalid merchant/customer network mismatch = Address prefix does not match selected network
+```
+
+### Security note
+
+This browser demo is educational. Production merchants should verify redemption proof server-side before delivering goods, services, benefits, or off-chain value.
