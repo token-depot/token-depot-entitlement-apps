@@ -191,3 +191,55 @@ invalid merchant/customer network mismatch = Address prefix does not match selec
 ### Security note
 
 This browser demo is educational. Production merchants should verify redemption proof server-side before delivering goods, services, benefits, or off-chain value.
+
+## EA-5 — Backend Verification Server
+
+### Purpose
+
+Move the EA-3 and EA-4 verification patterns from browser demos to a backend service.
+
+### Routes
+
+```text
+GET /health
+POST /verify/holding
+POST /verify/redeem
+```
+
+### Holding verification input
+
+```text
+network: mainnet | tn10
+walletAddress: kaspa:... or kaspatest:...
+ca: raw 64-char CA or CA:<64-char-ca>
+minimumAmount: human display amount using token decimals
+```
+
+### Holding verification result
+
+```text
+ACCESS_GRANTED
+ACCESS_DENIED
+```
+
+### Redeem verification input
+
+```text
+network: mainnet | tn10
+proofId: opScore digits or 64-character hex id
+ca: raw 64-char CA or CA:<64-char-ca>
+expectedAmount: human display amount using token decimals
+merchantAddress: kaspa:... or kaspatest:...
+customerAddress: optional kaspa:... or kaspatest:...
+```
+
+### Redeem verification result
+
+```text
+REDEEM_VERIFIED
+REDEEM_REJECTED
+```
+
+### Security note
+
+EA-5 is still a reference server. A production integration should add authentication, authorization, rate limits, logging, replay protection, business-specific policy, and durable order/redeem state.
