@@ -7,11 +7,13 @@ This repository is intentionally app-first, not SDK-first. The first examples ar
 ## Current status
 
 ```text
-v0.1.2
+v0.1.3
 EA-1 CA Token Explorer: working
 EA-2 Wallet Entitlement Viewer: working
-EA-3 Token Gate Demo: added for testing
+EA-3 Token Gate Demo: working from balance proof
+EA-4 Merchant Redeem Verifier: added for testing
 Address-path handling: fixed for Kasplex address tokenlist endpoints
+Operation proof lookup: proved with opScore
 ```
 
 ## What this repo demonstrates
@@ -20,6 +22,7 @@ Address-path handling: fixed for Kasplex address tokenlist endpoints
 - How to recover public CA metadata such as name, decimals, mode, state, supply, holders, and operation counters.
 - How to view CA issue-mode token balances for a Kaspa address.
 - How to make a simple read-only token-gate decision from CA balance proof.
+- How to verify a merchant redemption transfer from public operation proof.
 - How to distinguish public token metadata from Token Depot's known-CA registry.
 - How to prepare for real-world entitlement, coupon, membership, license, and redemption flows.
 
@@ -30,6 +33,7 @@ Address-path handling: fixed for Kasplex address tokenlist endpoints
 | CA Token Explorer | `apps/ca-token-explorer/web-js/` | Enter a CA and recover public metadata. |
 | Wallet Entitlement Viewer | `apps/wallet-entitlement-viewer/web-js/` | Enter a Kaspa address and view CA issue-mode entitlements. |
 | Token Gate Demo | `apps/token-gate-demo/web-js/` | Enter wallet + CA + minimum amount and receive an access decision. |
+| Merchant Redeem Verifier | `apps/merchant-redeem-verifier/web-js/` | Enter operation proof + expected transfer details and verify redemption. |
 
 ## Quick start
 
@@ -46,6 +50,7 @@ Then open:
 http://127.0.0.1:8088/apps/ca-token-explorer/web-js/
 http://127.0.0.1:8088/apps/wallet-entitlement-viewer/web-js/
 http://127.0.0.1:8088/apps/token-gate-demo/web-js/
+http://127.0.0.1:8088/apps/merchant-redeem-verifier/web-js/
 ```
 
 No wallet connection is used. No private keys, mnemonics, passphrases, keyfiles, signing, or Token Depot hosted infrastructure are required.
@@ -63,6 +68,12 @@ Useful mainnet holder address for demos:
 kaspa:qpkxn24070npk7cx336vlfa6wcj8cvcgrwd482rxdeqn9qrsd6gkzkpt9sr94
 ```
 
+Useful redemption proof id for EA-4:
+
+```text
+4293125140000
+```
+
 ## Public API bases
 
 ```text
@@ -76,7 +87,7 @@ Public API metadata proves that a CA exists and what the indexer reports about i
 
 ## Browser demo warning
 
-Frontend-only token gates are educational. Production dapps should verify entitlements server-side before granting protected access.
+Frontend-only token gates and browser redemption checks are educational. Production dapps should verify entitlements and redemption proofs server-side before granting protected access or delivering value.
 
 ## Scope boundary
 
