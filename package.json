@@ -1,11 +1,12 @@
 {
   "name": "token-depot-entitlement-apps",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": false,
   "type": "module",
   "description": "Reference apps for Token Depot-issued KRC-20 CA issue-mode entitlement tokens.",
   "scripts": {
-    "check": "node --check shared/js/ca-normalize.js && node --check shared/js/entitlement-format.js && node --check shared/js/kasplex-client.js && node --check apps/ca-token-explorer/web-js/app.js && node --check apps/wallet-entitlement-viewer/web-js/app.js && node --check apps/token-gate-demo/web-js/app.js && node --check apps/merchant-redeem-verifier/web-js/app.js && node scripts/verify-fixtures.mjs"
+    "check": "node --check shared/js/ca-normalize.js && node --check shared/js/entitlement-format.js && node --check shared/js/kasplex-client.js && node --check apps/ca-token-explorer/web-js/app.js && node --check apps/wallet-entitlement-viewer/web-js/app.js && node --check apps/token-gate-demo/web-js/app.js && node --check apps/merchant-redeem-verifier/web-js/app.js && node --check apps/backend-verification-server/node-server/server.js && node scripts/verify-fixtures.mjs",
+    "start:backend": "node apps/backend-verification-server/node-server/server.js"
   },
   "keywords": ["token-depot", "kaspa", "krc20", "entitlements", "ca-tokens", "issue-mode"],
   "license": "MIT"
