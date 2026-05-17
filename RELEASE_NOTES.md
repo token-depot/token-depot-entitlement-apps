@@ -1,5 +1,66 @@
 # Release Notes
 
+## v0.1.2 — EA-3 Token Gate Demo
+
+### Status
+
+```text
+EA-1 CA Token Explorer: working
+EA-2 Wallet Entitlement Viewer: working
+EA-3 Token Gate Demo: added for testing
+```
+
+### Added
+
+EA-3 is a read-only browser token-gate demo:
+
+```text
+apps/token-gate-demo/web-js/
+```
+
+It accepts:
+
+```text
+network
+wallet address
+required CA
+minimum human-display amount
+```
+
+It performs:
+
+```text
+GET /krc20/token/{ca}
+GET /krc20/address/{address}/token/{ca}
+```
+
+Then compares:
+
+```text
+BigInt(balanceRaw) >= BigInt(requiredRaw)
+```
+
+and returns:
+
+```text
+ACCESS GRANTED
+ACCESS DENIED
+```
+
+### Added shared helper
+
+`shared/js/entitlement-format.js` now includes:
+
+```text
+displayToRaw(amount, decimals)
+```
+
+This avoids floating-point comparisons by converting user-entered display amounts into raw token units before access checks.
+
+### Security note
+
+EA-3 is a browser demo. Production dapps should perform the same entitlement check server-side before granting protected access.
+
 ## v0.1.1 — Runtime proof and address-path fix
 
 ### Status
