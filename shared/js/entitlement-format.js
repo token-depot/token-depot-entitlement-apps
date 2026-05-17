@@ -13,6 +13,24 @@ export function rawToDisplay(raw, decimals) {
   return `${negative ? '-' : ''}${whole}${fraction ? `.${fraction}` : ''}`;
 }
 
+export function displayToRaw(amount, decimals) {
+  const text = String(amount ?? '').trim();
+  const dec = Number.parseInt(String(decimals ?? '0'), 10);
+  if (!Number.isFinite(dec) || dec < 0) {
+    throw new Error('Invalid decimals value.');
+  }
+  if (!/^\d+(\.\d+)?$/.test(text)) {
+    throw new Error('Amount must be a non-negative decimal number.');
+  }
+
+  const [whole, fraction = ''] = text.split('.');
+  if (fraction.length > dec) {
+    throw new Error(`Amount has more fractional digits than token decimals (${dec}).`);
+  }
+
+  return `${whole}${fraction.padEnd(dec, '0')}`.replace(/^0+(?=\d)/, '') || '0';
+}
+
 export function findKnownCa(registry, network, ca) {
   const normalized = normalizeCa(ca);
   return registry?.[network]?.[normalized] || null;
