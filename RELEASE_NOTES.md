@@ -1,5 +1,48 @@
 # Release Notes
 
+## v0.1.4 — EA-5 Backend Verification Server
+
+Status:
+
+```text
+EA-1 CA Token Explorer: working
+EA-2 Wallet Entitlement Viewer: working
+EA-3 Token Gate Demo: working from balance proof
+EA-4 Merchant Redeem Verifier: working from operation proof
+EA-5 Backend Verification Server: added for testing
+```
+
+EA-5 adds:
+
+```text
+apps/backend-verification-server/node-server/
+```
+
+It provides two server-side verification routes:
+
+```text
+POST /verify/holding
+POST /verify/redeem
+```
+
+The holding route repeats the EA-3 token-gate check on the backend and returns:
+
+```text
+ACCESS_GRANTED
+ACCESS_DENIED
+```
+
+The redeem route repeats the EA-4 merchant redemption check on the backend and returns:
+
+```text
+REDEEM_VERIFIED
+REDEEM_REJECTED
+```
+
+EA-5 uses Node's built-in HTTP server and built-in fetch. No framework install is required.
+
+Production integrations should add authentication, authorization, rate limits, durable order/redeem state, replay protection, and business-specific policy.
+
 ## v0.1.3 — EA-4 Merchant Redeem Verifier
 
 Status:
