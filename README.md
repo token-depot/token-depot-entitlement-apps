@@ -4,6 +4,15 @@ Reference apps for discovering, viewing, and verifying Token Depot-issued KRC-20
 
 This repository is intentionally app-first, not SDK-first. The first examples are plain HTML/JavaScript so developers can see the exact public API calls and normalized data model without framework scaffolding.
 
+## Current status
+
+```text
+v0.1.1
+EA-1 CA Token Explorer: working
+EA-2 Wallet Entitlement Viewer: working
+Address-path handling: fixed for Kasplex address tokenlist endpoints
+```
+
 ## What this repo demonstrates
 
 - How to look up a KRC-20 issue-mode token by CA.
@@ -24,6 +33,7 @@ This repository is intentionally app-first, not SDK-first. The first examples ar
 Serve the repo locally so browser ES modules load correctly:
 
 ```bash
+npm run check
 python3 -m http.server 8088
 ```
 
