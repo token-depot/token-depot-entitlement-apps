@@ -1,0 +1,17 @@
+{
+  "mainnet": {
+    "6f685f85d679d5b7b5d702ebe4a249fb31ddc9edbb7c9f49971daef7cc7fe48f": {
+      "name": "TDUSDC",
+      "decimals": 6,
+      "purpose": "Token Depot wrapped/demo entitlement",
+      "issuerAddress": "kaspa:qpkxn24070npk7cx336vlfa6wcj8cvcgrwd482rxdeqn9qrsd6gkzkpt9sr94"
+    },
+    "2d6fc4377f2fb2a5d051e6c99b6d784960b45edc2f6d268bfc432b5ee5dee3dc": {
+      "name": "MMXXVI",
+      "decimals": 0,
+      "purpose": "Token Depot license / membership entitlement",
+      "issuerAddress": "kaspa:qpkxn24070npk7cx336vlfa6wcj8cvcgrwd482rxdeqn9qrsd6gkzkpt9sr94"
+    }
+  },
+  "tn10": {}
+}
