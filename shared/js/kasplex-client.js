@@ -9,6 +9,14 @@ export function getApiBase(network) {
   return API_BASES[normalizeNetwork(network)];
 }
 
+function normalizeAddressPath(address) {
+  const text = String(address || '').trim().toLowerCase();
+  if (!/^(kaspa|kaspatest):[a-z0-9]+$/.test(text)) {
+    throw new Error('Invalid Kaspa address format. Expected kaspa:<address> or kaspatest:<address>.');
+  }
+  return text;
+}
+
 async function fetchJson(url) {
   const res = await fetch(url, { method: 'GET', headers: { accept: 'application/json' } });
   if (!res.ok) {
@@ -29,16 +37,16 @@ export async function fetchTokenInfo(network, caInput) {
 }
 
 export async function fetchAddressTokenList(network, address) {
-  const safeAddress = encodeURIComponent(String(address || '').trim());
-  const url = `${getApiBase(network)}/krc20/address/${safeAddress}/tokenlist`;
+  const addressPath = normalizeAddressPath(address);
+  const url = `${getApiBase(network)}/krc20/address/${addressPath}/tokenlist`;
   const data = await fetchJson(url);
   return { url, data, tokens: Array.isArray(data.result) ? data.result : [] };
 }
 
 export async function fetchAddressToken(network, address, caInput) {
   const ca = normalizeCa(caInput);
-  const safeAddress = encodeURIComponent(String(address || '').trim());
-  const url = `${getApiBase(network)}/krc20/address/${safeAddress}/token/${ca}`;
+  const addressPath = normalizeAddressPath(address);
+  const url = `${getApiBase(network)}/krc20/address/${addressPath}/token/${ca}`;
   const data = await fetchJson(url);
   return { url, data, holding: Array.isArray(data.result) ? data.result[0] || null : null };
 }
